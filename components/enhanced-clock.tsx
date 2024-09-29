@@ -165,7 +165,7 @@ export default function EnhancedClockComponent() {
         <div className="mb-8">
           {isDigital ? (
             <div
-              className={`text-4xl md:text-6xl font-bold ${
+              className={`text-5xl md:text-6xl font-bold ${
                 isDarkTheme ? 'text-white' : 'text-gray-900'
               }`}
               aria-live="polite"
