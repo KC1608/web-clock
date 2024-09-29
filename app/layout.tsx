@@ -15,9 +15,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Web clock",
+  title: "Web Clock - Analog and Digital Time Display",
   description:
-    "Adjust time according to your requirement between analog and digital",
+    "A versatile web clock that lets you switch seamlessly between analog and digital displays. Customize and adjust the time according to your preference, providing a user-friendly experience for any purpose.",
 };
 
 export default function RootLayout({
