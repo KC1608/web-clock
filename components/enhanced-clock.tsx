@@ -11,11 +11,26 @@ const clockDesigns = ["Minimal", "Futuristic"];
 
 export default function EnhancedClockComponent() {
   const [time, setTime] = useState(new Date());
-  const [isDigital, setIsDigital] = useState<boolean>(localStorage ? localStorage.getItem("isDigital") === 'true' : true);
-  const [showSeconds, setShowSeconds] = useState(localStorage ? localStorage.getItem("showSeconds") === 'true' : false);
-  const [selectedDesign, setSelectedDesign] = useState(localStorage ? localStorage.getItem("selectedDesign") || "Minimal" : "Minimal");
+  const [isDigital, setIsDigital] = useState<boolean>(true);
+  const [showSeconds, setShowSeconds] = useState(false);
+  const [selectedDesign, setSelectedDesign] = useState("Minimal");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(localStorage ? localStorage.getItem("isDarkTheme") === 'true' : false);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Safely access localStorage here
+      const storedIsDigital = localStorage.getItem("isDigital") === 'true';
+      const storedShowSeconds = localStorage.getItem("showSeconds") === 'true';
+      const storedSelectedDesign = localStorage.getItem("selectedDesign") || "Minimal";
+      const storedIsDarkTheme = localStorage.getItem("isDarkTheme") === 'true';
+
+      setIsDigital(storedIsDigital);
+      setShowSeconds(storedShowSeconds);
+      setSelectedDesign(storedSelectedDesign);
+      setIsDarkTheme(storedIsDarkTheme);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -31,12 +46,10 @@ export default function EnhancedClockComponent() {
     setShowSeconds(!showSeconds);
     localStorage.setItem("showSeconds", (!showSeconds).toString());
   };
-  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     localStorage.setItem("isSidebarOpen", (!isSidebarOpen).toString());
   };
-  
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
     localStorage.setItem("isDarkTheme", (!isDarkTheme).toString());
@@ -109,10 +122,6 @@ export default function EnhancedClockComponent() {
       </div>
     );
   };
-
-  if (typeof window == undefined) {
-    return null;
-  }
 
   return (
     <div
@@ -222,10 +231,10 @@ export default function EnhancedClockComponent() {
             isDarkTheme ? "text-white" : "text-gray-900"
           }`}
         >
-          {moment().format("ddd, D MMMM")}
+          {moment().format("ddd, MMMM D, YYYY")}
         </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
   );
 }
