@@ -11,22 +11,36 @@ const clockDesigns = ["Minimal", "Futuristic"];
 
 export default function EnhancedClockComponent() {
   const [time, setTime] = useState(new Date());
-  const [isDigital, setIsDigital] = useState(true);
-  const [showSeconds, setShowSeconds] = useState(false);
-  const [selectedDesign, setSelectedDesign] = useState("Minimal");
+  if(!localStorage) return;
+  const [isDigital, setIsDigital] = useState<boolean>(localStorage.getItem("isDigital") === 'true');
+  const [showSeconds, setShowSeconds] = useState(localStorage.getItem("showSeconds") === 'true');
+  const [selectedDesign, setSelectedDesign] = useState(localStorage.getItem("selectedDesign") || "Minimal");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(localStorage.getItem("isDarkTheme") === 'true');
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const toggleClockType = () => setIsDigital(!isDigital);
-  const toggleSeconds = () => setShowSeconds(!showSeconds);
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleClockType = () => {
+    setIsDigital(!isDigital);
+    localStorage.setItem("isDigital", (!isDigital).toString());
+  };
+
+  const toggleSeconds = () => {
+    setShowSeconds(!showSeconds);
+    localStorage.setItem("showSeconds", (!showSeconds).toString());
+  };
+  
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    localStorage.setItem("isSidebarOpen", (!isSidebarOpen).toString());
+  };
+  
   const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme)
+    setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("isDarkTheme", (!isDarkTheme).toString());
   };
 
   const formatDigitalTime = (date: Date) => {
