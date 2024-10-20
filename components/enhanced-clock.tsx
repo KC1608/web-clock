@@ -46,12 +46,10 @@ export default function EnhancedClockComponent() {
     setShowSeconds(!showSeconds);
     localStorage.setItem("showSeconds", (!showSeconds).toString());
   };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     localStorage.setItem("isSidebarOpen", (!isSidebarOpen).toString());
   };
-
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
     localStorage.setItem("isDarkTheme", (!isDarkTheme).toString());
