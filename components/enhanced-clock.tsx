@@ -12,7 +12,7 @@ const clockDesigns = ["Minimal", "Futuristic"];
 export default function EnhancedClockComponent() {
   const [time, setTime] = useState(new Date());
   const [isDigital, setIsDigital] = useState(true);
-  const [showSeconds, setShowSeconds] = useState(true);
+  const [showSeconds, setShowSeconds] = useState(false);
   const [selectedDesign, setSelectedDesign] = useState("Minimal");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -25,7 +25,9 @@ export default function EnhancedClockComponent() {
   const toggleClockType = () => setIsDigital(!isDigital);
   const toggleSeconds = () => setShowSeconds(!showSeconds);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const toggleTheme = () => setIsDarkTheme(!isDarkTheme);
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme)
+  };
 
   const formatDigitalTime = (date: Date) => {
     const options: Intl.DateTimeFormatOptions = {
