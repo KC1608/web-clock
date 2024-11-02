@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "./sidebar";
 import moment from "moment";
+import Link from "next/link";
 
 const clockDesigns = ["Minimal", "Futuristic"];
 
@@ -212,6 +213,9 @@ export default function EnhancedClockComponent() {
               }`}
             />
           </div>
+          <Link href={"/editor"}>
+            Editor Screen
+          </Link>
         </div>
         <div className="mb-8">
           {isDigital ? (
