@@ -213,8 +213,17 @@ export default function EnhancedClockComponent() {
               }`}
             />
           </div>
-          <Link href={"/editor"}>
-            Editor Screen
+          <Link
+            href="/"
+            className="rounded-lg bg-red-600/10 border border-red-500/30 px-3 py-1.5 text-xs font-semibold text-red-500 hover:bg-red-600 hover:text-white transition-colors"
+          >
+            ← RevPulse AutoTech Home
+          </Link>
+          <Link
+            href="/editor"
+            className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+          >
+            Editor
           </Link>
         </div>
         <div className="mb-8">

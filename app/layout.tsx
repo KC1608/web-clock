@@ -15,9 +15,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Web Clock - Analog and Digital Time Display",
+  title: "RevPulse AutoTech - Automotive Engineering & Car Knowledge Hub",
   description:
-    "A versatile web clock that lets you switch seamlessly between analog and digital displays. Customize and adjust the time according to your preference, providing a user-friendly experience for any purpose.",
+    "The open technical knowledge platform for car enthusiasts. Deep dives into engines, turbochargers, intakes, exhausts, headlights, and automotive physics.",
 };
 
 export default function RootLayout({

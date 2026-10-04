@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { executeCode } from "./api";
 // import { toaster } from "@/components/ui/toaster"
 
@@ -16,7 +16,7 @@ const Output = ({ editorRef, language }) => {
       setIsLoading(true);
       const { run: result } = await executeCode(language, sourceCode);
       setOutput(result.output.split("\n"));
-      result.stderr ? setIsError(true) : setIsError(false);
+      setIsError(Boolean(result.stderr));
     } catch (error) {
       console.log(error);
       // toaster.create({
