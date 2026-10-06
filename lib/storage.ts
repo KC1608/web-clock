@@ -75,3 +75,20 @@ export function addConnectMessage(
   global.__connectMessagesStore = [newMessage, ...(global.__connectMessagesStore || [])];
   return newMessage;
 }
+
+export function deleteArticle(idOrSlug: string): boolean {
+  if (!global.__articlesStore) return false;
+  const initialLength = global.__articlesStore.length;
+  global.__articlesStore = global.__articlesStore.filter(
+    (a) => a.id !== idOrSlug && a.slug !== idOrSlug
+  );
+  return global.__articlesStore.length < initialLength;
+}
+
+export function deleteConnectMessage(id: string): boolean {
+  if (!global.__connectMessagesStore) return false;
+  const initialLength = global.__connectMessagesStore.length;
+  global.__connectMessagesStore = global.__connectMessagesStore.filter((m) => m.id !== id);
+  return global.__connectMessagesStore.length < initialLength;
+}
+

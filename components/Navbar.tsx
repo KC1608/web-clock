@@ -1,15 +1,40 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Gauge, Clock, MessageSquarePlus, PenTool, Menu, X } from "lucide-react";
+import { Gauge, Clock, MessageSquarePlus, PenTool, Menu, X, Shield } from "lucide-react";
 import AuthButton from "./AuthButton";
 import BrandLogo from "./BrandLogo";
+import { createClient } from "@/utils/supabase/client";
+import { isAdmin } from "@/lib/admin-auth";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAdminUser, setIsAdminUser] = useState(false);
   const pathname = usePathname();
+  const supabase = createClient();
+
+  useEffect(() => {
+    const checkUserRole = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setIsAdminUser(isAdmin(user?.email));
+    };
+
+    checkUserRole();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAdminUser(isAdmin(session?.user?.email));
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   const navLinks = [
     { name: "Car Tech Hub", href: "/articles", icon: Gauge },
@@ -56,6 +81,21 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* Admin link for authorized admins */}
+          {isAdminUser && (
+            <Link
+              href="/admin"
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border transition-colors ${
+                pathname.startsWith("/admin")
+                  ? "bg-red-600 text-white border-red-500"
+                  : "bg-red-600/10 text-red-400 border-red-500/30 hover:bg-red-600 hover:text-white"
+              }`}
+            >
+              <Shield className="h-3.5 w-3.5" />
+              Admin
+            </Link>
+          )}
         </nav>
 
         {/* Desktop Actions: Google Auth & Submit Guide */}
@@ -115,6 +155,17 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {isAdminUser && (
+            <Link
+              href="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-base font-bold bg-red-600/15 text-red-400 border border-red-500/30"
+            >
+              <Shield className="h-4 w-4" />
+              Admin Portal
+            </Link>
+          )}
         </div>
       )}
     </header>
