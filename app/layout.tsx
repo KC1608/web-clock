@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "RevPulse AutoTech - Automotive Engineering & Car Knowledge Hub",
   description:
     "The open technical knowledge platform for car enthusiasts. Deep dives into engines, turbochargers, intakes, exhausts, headlights, and automotive physics.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

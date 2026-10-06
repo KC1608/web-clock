@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Gauge, Wind, Clock, MessageSquarePlus, PenTool, Menu, X } from "lucide-react";
+import { Gauge, Clock, MessageSquarePlus, PenTool, Menu, X } from "lucide-react";
 import AuthButton from "./AuthButton";
+import BrandLogo from "./BrandLogo";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,20 +22,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-amber-600 text-white shadow-lg shadow-red-900/30 group-hover:scale-105 transition-transform duration-200">
-            <Wind className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold tracking-tight text-white text-lg">REV</span>
-              <span className="font-extrabold tracking-tight text-red-500 text-lg">PULSE</span>
-              <span className="rounded bg-red-500/20 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-red-400 uppercase">
-                AutoTech
-              </span>
-            </div>
-            <p className="text-[11px] text-zinc-400 leading-none">Automotive Engineering & Knowledge Hub</p>
-          </div>
+        <Link href="/">
+          <BrandLogo size="md" />
         </Link>
 
         {/* Desktop Navigation Links */}

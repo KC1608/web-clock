@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Wind, Heart, Shield, Cpu, Clock, MessageSquare } from "lucide-react";
+import { Heart, Shield, Cpu, Clock, MessageSquare } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 export default function Footer() {
   return (
@@ -9,14 +10,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand info */}
           <div className="md:col-span-2 space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-600 text-white">
-                <Wind className="h-4 w-4" />
-              </div>
-              <span className="text-lg font-bold text-white tracking-tight">
-                REV<span className="text-red-500">PULSE</span> AutoTech
-              </span>
-            </div>
+            <Link href="/">
+              <BrandLogo size="sm" />
+            </Link>
             <p className="text-sm text-zinc-400 max-w-md">
               A community knowledge hub built for automotive engineers, mechanics, and car enthusiasts.
               Explaining the intricate physics and mechanics of engines, turbos, intakes, exhausts, and headlights.
@@ -84,9 +80,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-zinc-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400">
+        <div className="border-t border-zinc-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-3">
           <p>© {new Date().getFullYear()} RevPulse AutoTech. Built for car enthusiasts worldwide.</p>
-          <p className="flex items-center gap-1 mt-2 sm:mt-0">
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-red-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/terms" className="hover:text-red-400 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
+          <p className="flex items-center gap-1">
             Powered by Next.js &amp; passionate gearheads <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" />
           </p>
         </div>
